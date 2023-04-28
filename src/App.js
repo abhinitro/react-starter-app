@@ -17,6 +17,8 @@ class App extends Component {
       name: "Abhilash",
       class: "12",
       counter: 0,
+      arr:[],
+      dummy:{}
     };
     //bind
     this.onClicDiv = this.onClicDiv.bind(this);
@@ -48,7 +50,7 @@ class App extends Component {
         <p>Counter :{this.state.counter}</p>
         <button onClick={this.increment}>+</button>
         <button onClick={this.decrement}> -</button>
-        <Footer counter={this.state.counter} />
+        <Footer count={this.state.counter} />
       </div>
     );
   }

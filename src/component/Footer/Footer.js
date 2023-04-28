@@ -7,8 +7,8 @@ class Footer extends Component {
   }
 
   render() {
-    const { counter } = this.props;
-    return <div>Footer {counter}</div>;
+    const { count } = this.props;
+    return <div>Footer {count}</div>;
   }
 }
 
