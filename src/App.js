@@ -1,6 +1,6 @@
 import { Component } from "react";
 import "./App.css";
-import { FirstComponent, Footer } from "./component";
+import { FirstComponent, Step } from "./component";
 
 /***
  * State -variable which are mutable
@@ -17,8 +17,8 @@ class App extends Component {
       name: "Abhilash",
       class: "12",
       counter: 0,
-      arr:[],
-      dummy:{}
+      arr: [],
+      dummy: {},
     };
     //bind
     this.onClicDiv = this.onClicDiv.bind(this);
@@ -32,25 +32,37 @@ class App extends Component {
 
   increment() {
     let { counter } = this.state;
-    counter++;
+    if (counter < 2) {
+      counter++;
 
-    this.setState({ counter });
+      this.setState({ counter });
+    }
   }
 
   decrement() {
     let { counter } = this.state;
-    counter--;
+    if (counter !== 0) {
+      counter--;
 
-    this.setState({ counter });
+      this.setState({ counter });
+    }
   }
   render() {
     return (
       <div onClick={this.onClicDiv}>
-        {this.state.counter === 0 && <FirstComponent />}
-        <p>Counter :{this.state.counter}</p>
-        <button onClick={this.increment}>+</button>
-        <button onClick={this.decrement}> -</button>
-        <Footer count={this.state.counter} />
+        <FirstComponent />
+        <div className="container">
+          <Step steps={this.state.counter} />
+
+          <button className="left" onClick={this.increment}>
+            Next
+          </button>
+          {this.state.counter !== 0 && (
+            <button className="left" onClick={this.decrement}>
+              Prev
+            </button>
+          )}
+        </div>
       </div>
     );
   }

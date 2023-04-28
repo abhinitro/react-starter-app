@@ -3,14 +3,16 @@ import React, { Component } from "react";
 class FirstComponent extends Component {
   render() {
     return (
-      <nav>
+      <div id="nav">
         <ul>
-          <li>First</li>
-          <li>Second</li>
-
-          <li>Third</li>
+          <li>
+            <a href="/Home">Home</a>
+          </li>
+          <li>
+            <a href="/About">About Us</a>
+          </li>
         </ul>
-      </nav>
+      </div>
     );
   }
 }
