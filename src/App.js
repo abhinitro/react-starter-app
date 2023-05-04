@@ -12,16 +12,17 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       <div>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Layout {...this.props} />}>
               {routes.map((item) => {
                 return (
                   <Route
                     path={item.path}
-                    element={item.element}
+                    element={<item.element {...this.props} auth={true} />}
                     key={item.id}
                   ></Route>
                 );

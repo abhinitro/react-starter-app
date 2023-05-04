@@ -1,15 +1,24 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 
-class About extends Component {
+const About = (props) => {
+  let [counter, setCount] = useState(0);
 
-  componentWillUnmount(){
- 
-    console.log("About is removing");
+  const incremt = () => {
+    setCount(counter++);
+  };
 
-  }
-  render() {
-    return <div>About</div>;
-  }
-}
+  useEffect(() => {
+    console.log("componentDIDMount");
+  }, []);
+
+  useEffect(() => {
+    console.log("componentDIDUpdate");
+  }, [counter]);
+
+  console.log("render", props);
+  return <div onClick={() => incremt()}>About {counter}</div>;
+};
+
+About.propTypes = {};
 
 export default About;

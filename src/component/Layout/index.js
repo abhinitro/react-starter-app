@@ -5,11 +5,12 @@ import { Outlet } from "react-router-dom";
 
 class Index extends Component {
   render() {
+    console.log(this.props,"ddddddddd")
     return (
       <div>
         <Header />
         <Container>
-          <Outlet />
+          <Outlet {...this.props} />
         </Container>
         <Footer />
       </div>
