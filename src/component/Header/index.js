@@ -9,6 +9,7 @@ import {
   NavLink,
 } from "reactstrap";
 
+import "./Header.scss"
 import { Link } from "react-router-dom";
 
 export default class Index extends React.Component {

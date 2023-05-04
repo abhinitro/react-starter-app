@@ -3,9 +3,7 @@ import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Layout } from "./component";
-import Home from "./component/pages/Home";
-import About from "./component/Step/About";
-import Blog from "./component/pages/Blog";
+import { routes } from "./routes/frontend";
 
 class App extends Component {
   constructor(props) {
@@ -19,9 +17,15 @@ class App extends Component {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout />}>
-              <Route index element={<Home></Home>}></Route>
-              <Route path="about" element={<About></About>}></Route>
-              <Route path="blog" element={<Blog />}></Route>
+              {routes.map((item) => {
+                return (
+                  <Route
+                    path={item.path}
+                    element={item.element}
+                    key={item.id}
+                  ></Route>
+                );
+              })}
             </Route>
           </Routes>
         </BrowserRouter>
