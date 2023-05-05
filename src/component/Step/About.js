@@ -1,24 +1,30 @@
-import React, { useState, useEffect } from "react";
+import React, { PureComponent } from "react";
 
-const About = (props) => {
-  let [counter, setCount] = useState(0);
+class About extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      counter: 0,
+    };
+    this.click = this.click.bind(this);
+  }
 
-  const incremt = () => {
-    setCount(counter++);
-  };
+  click() {
+    let counter = this.state.counter;
+    counter++;
+    this.setState({ counter });
+  }
 
-  useEffect(() => {
-    console.log("componentDIDMount");
-  }, []);
-
-  useEffect(() => {
-    console.log("componentDIDUpdate");
-  }, [counter]);
-
-  console.log("render", props);
-  return <div onClick={() => incremt()}>About {counter}</div>;
-};
-
-About.propTypes = {};
+  render() {
+    return (
+      <div>
+        <span>
+          <button onClick={this.click}>click me</button>
+          counter :{this.state.counter}
+        </span>
+      </div>
+    );
+  }
+}
 
 export default About;

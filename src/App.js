@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Layout } from "./component";
 import { routes } from "./routes/frontend";
-
+import ThemeHoc from "./component/Hoc/ThemeHoc";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +12,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <BrowserRouter>
@@ -22,7 +21,13 @@ class App extends Component {
                 return (
                   <Route
                     path={item.path}
-                    element={<item.element {...this.props} auth={true} />}
+                    element={
+                      <item.element
+                        {...this.props}
+                        auth={true}
+                        color={this.props.color}
+                      />
+                    }
                     key={item.id}
                   ></Route>
                 );
@@ -34,4 +39,5 @@ class App extends Component {
     );
   }
 }
-export default App;
+
+export default ThemeHoc(App);
