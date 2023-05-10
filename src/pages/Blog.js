@@ -1,41 +1,59 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+//stateless component
 
-class Blog extends Component {
-  constructor(props) {
-    super(props);
+/**
+ *   internal state
+ *   no lifecycle
+ *   faster than class component
+ *
+ *    mounting componentDidMount
+ *    updation  componentDidUpdate
+ *    unmounting componentWillUnmount
+ *    useEffect(callback,array[states])
+ *
+ *
+ */
+const Blog = (props) => {
+  let [state, setState] = useState({
+    name: "",
+    value: "",
+  });
 
-    this.state = {
-      name: "",
-      age: "",
-      gender: "",
-      description: "",
-    };
-    this.change = this.change.bind(this);
-  }
-
-  change = (e) => {
-    this.setState({ [e.target.name]: e.target.value });
+  const navigate = useNavigate();
+  const click = () => {
+    setState({ name: "abhilash" });
   };
 
-  render() {
-    return (
-      <form>
-        <input
-          type="text"
-          name="name"
-          onChange={(e) => this.change(e)}
-          value={this.state.name}
-        />
+  useEffect(function () {
+    console.log("componentDidMount");
+  }, []);
 
-        <input
-          type="text"
-          name="age"
-          onChange={(e) => this.change(e)}
-          value={this.state.age}
-        />
-      </form>
-    );
-  }
-}
+  useEffect(
+    function () {
+      console.log("componentDidUpdarte  =======");
+
+      if (state.name === "abhilash") {
+        navigate("/about");
+      }
+    },
+    [state.value, state.name]
+  );
+
+  useEffect(function () {
+    return () => {
+      console.log("componentWillUnmount");
+    };
+  }, []);
+
+  console.log("render");
+
+  return (
+    <div>
+      Blog.js {state.value} {state.name}
+      <button onClick={(e) => click()}>click me</button>
+    </div>
+  );
+};
 
 export default Blog;
