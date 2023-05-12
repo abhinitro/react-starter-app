@@ -1,31 +1,36 @@
-import { Component } from "react";
+import { createContext, useEffect, useRef, useState } from "react";
 import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Layout } from "./component";
 import { routes } from "./routes/frontend";
 import ThemeHoc from "./component/Hoc/ThemeHoc";
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+import UserContext from "./context/UserContext";
 
-  render() {
-    return (
-      <div>
+const App = (props) => {
+  const [name, setName] = useState("Abhilash");
+  const button = useRef(null);
+  useEffect(() => {
+    setTimeout(() => {
+      button.current.click();
+    }, 2000);
+  }, []);
+  return (
+    <div>
+      <UserContext.Provider value={{ name: name }}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Layout {...this.props} />}>
+            <Route path="/" element={<Layout {...props} />}>
               {routes.map((item) => {
                 return (
                   <Route
                     path={item.path}
                     element={
                       <item.element
-                        {...this.props}
+                        {...props}
                         auth={true}
-                        color={this.props.color}
+                        color={props.color}
+                        ref={button}
                       />
                     }
                     key={item.id}
@@ -35,9 +40,9 @@ class App extends Component {
             </Route>
           </Routes>
         </BrowserRouter>
-      </div>
-    );
-  }
-}
+      </UserContext.Provider>
+    </div>
+  );
+};
 
 export default ThemeHoc(App);

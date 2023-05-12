@@ -1,30 +1,32 @@
-import React, { PureComponent } from "react";
+import React, { forwardRef, useEffect, useRef } from "react";
+import UserContext from "../../context/UserContext";
 
-class About extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      counter: 0,
-    };
-    this.click = this.click.bind(this);
-  }
+const About = forwardRef((props, ref) => {
+  return (
+    <div>
+      <UserContext.Consumer>
+        {(c) => {
+          return <Button name={c.name} ref={ref}></Button>;
+        }}
+      </UserContext.Consumer>
+    </div>
+  );
+});
 
-  click() {
-    let counter = this.state.counter;
-    counter++;
-    this.setState({ counter });
-  }
-
-  render() {
-    return (
-      <div>
-        <span>
-          <button onClick={this.click}>click me</button>
-          counter :{this.state.counter}
-        </span>
-      </div>
-    );
-  }
-}
+const Button = forwardRef((props, ref) => {
+  useEffect(() => {
+    console.log({ ref });
+  }, []);
+  return (
+    <button
+      ref={ref}
+      onClick={() => {
+        alert("CLick me");
+      }}
+    >
+      {props.name}
+    </button>
+  );
+});
 
 export default About;

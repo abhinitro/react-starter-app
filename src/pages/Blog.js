@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import UserContext from "../context/UserContext";
 //stateless component
 
 /**
@@ -20,6 +21,8 @@ const Blog = (props) => {
     value: "",
   });
 
+  const context = useContext(UserContext);
+  console.log({ context });
   const navigate = useNavigate();
   const click = () => {
     setState({ name: "abhilash" });

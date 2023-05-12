@@ -12,14 +12,12 @@ import {
 import "./Header.scss";
 import {
   useLocation /* other hooks */,
-  useSearchParams,
   useParams,
   Link,
 } from "react-router-dom";
 
 export default function Index() {
   const [isOpen, setToggle] = useState(false);
-
   const location = useLocation();
   const params = useParams();
   console.log({ params });
